@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\Auth\UserController;
+use App\Http\Controllers\API\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', [UserController::class,'login']);
+Route::post('register', [UserController::class,'register']);
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/user', function () {
+        return user();
+    });
+    Route::post('logout', [UserController::class,'logout']);
+    Route::post('logout-from-all', [UserController::class,'logoutFromAll']);
+
+    Route::apiResource('category',CategoryController::class)->except('create','edit');
 });
+

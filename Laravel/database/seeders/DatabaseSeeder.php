@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Category;
+use App\Models\Note;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +18,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory(5)
+            ->create()
+            ->each(function($user){
+                Category::factory(3)
+                    ->forUser($user)
+                    ->create()
+                    ->each(function($category) use ($user){
+                        Note::factory(2)
+                            ->forCategory($category)
+                            ->forUser($user)
+                            ->create();
+                    });
+                    
+                Note::factory(3)
+                    ->uncategorized()
+                    ->forUser($user)
+                    ->create();
+            });
     }
 }
