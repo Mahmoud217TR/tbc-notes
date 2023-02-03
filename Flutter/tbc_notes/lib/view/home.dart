@@ -9,9 +9,17 @@ class Home extends GetView<HomeController> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       key: controller.scaffoldkey,
       drawer: Drawer(
         child: Container(color: Colors.amber),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: primerColor,
+        foregroundColor: fourthColor,
+        onPressed: () {},
+        child: Icon(Icons.add),
+        
       ),
       body: Stack(children: [
         Center(
@@ -30,16 +38,6 @@ class Home extends GetView<HomeController> {
             ),
           ),
         ),
-        // Center(
-        // child: IconButton(
-        //     onPressed: () {
-        //       controller.openDrawer();
-        //     },
-        //     icon: Icon(
-        //       Icons.menu,
-        //       size: 30,
-        //     )),
-        // ),
         Column(
           children: [
             SizedBox(
@@ -47,32 +45,59 @@ class Home extends GetView<HomeController> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 204, 231, 229),
-                  borderRadius: BorderRadius.circular(29),
-                ),
-                child: Expanded(
-                  child: TextFormField(
-                    // controller: mycontroller,
-                    // onChanged: onChanged,mayaa
-                    cursorColor: Color.fromARGB(255, 20, 16, 16),
-                    decoration: InputDecoration(
-                      // icon: Icon(
-                      // icon,
-                      // color: kPrimaryColor,
-                      // ),
-                      icon: IconButton(
-                          onPressed: () {
-                            controller.openDrawer();
-                          },
-                          icon: Icon(
-                            Icons.menu,
-                            size: 30,
-                          )),
-                      hintText: 'Search',
-                      border: InputBorder.none,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Card(
+                  color: fourthColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    //<-- SEE HERE
+                    side: const BorderSide(
+                      color: Color.fromARGB(255, 219, 219, 219),
                     ),
+                  ),
+                  elevation: 0.8,
+                  shadowColor: secondColor,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: IconButton(
+                            onPressed: () {
+                              controller.openDrawer();
+                            },
+                            icon: Icon(
+                              Icons.menu_outlined,
+                              size: size.width * 0.08,
+                              color: primerColor,
+                            )),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: TextFormField(
+                          // controller: mycontroller,
+                          // onChanged: onChanged,mayaa
+                          cursorColor: const Color.fromARGB(255, 20, 16, 16),
+                          decoration: InputDecoration(
+                            // icon: Icon(
+                            // icon,
+                            // color: kPrimaryColor,
+                            // ),
+
+                            hintText: 'Search your notes',
+                            hintStyle: TextStyle(
+                                color: primerColor,
+                                fontSize: size.width * 0.045),
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                          flex: 1,
+                          child: CircleAvatar(
+                            backgroundColor: secondColor,
+                          ))
+                    ],
                   ),
                 ),
               ),
@@ -80,8 +105,8 @@ class Home extends GetView<HomeController> {
             Expanded(
                 flex: 11,
                 child: Container(
-                  color: Colors.blue,
-                )),
+                    // color: primerColor,
+                    )),
           ],
         )
       ]),
