@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tbc_notes/view/constant.dart';
 import 'package:tbc_notes/view/home.dart';
-import 'package:tbc_notes/view/login.dart';
-import 'package:tbc_notes/view/signup.dart';
-import 'package:tbc_notes/view/welcomePage.dart';
 
 void main() {
   runApp(const MyApp());

@@ -6,11 +6,17 @@ class HomeController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
 
   void openDrawer() {
-      scaffoldkey.currentState!.openDrawer();
+    scaffoldkey.currentState!.openDrawer();
   }
 
   void closeDrawer() {
     scaffoldkey.currentState!.openEndDrawer();
-   }
-}
+  }
 
+  RxInt currentIndex = 0.obs;
+
+  void changePage(int? index) {
+    currentIndex(index);
+    print(currentIndex);
+  }
+}
