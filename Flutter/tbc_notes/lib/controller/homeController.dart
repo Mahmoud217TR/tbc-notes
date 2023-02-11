@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+  // int selectedIndex = 0;
 
   void openDrawer() {
     scaffoldkey.currentState!.openDrawer();
@@ -19,4 +20,6 @@ class HomeController extends GetxController {
     currentIndex(index);
     print(currentIndex);
   }
+
+  
 }

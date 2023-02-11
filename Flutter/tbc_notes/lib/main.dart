@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbc_notes/view/home.dart';
+import 'package:tbc_notes/view/test.dart';
 
 void main() {
   runApp(const MyApp());
