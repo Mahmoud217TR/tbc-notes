@@ -19,18 +19,26 @@ class Login extends StatelessWidget {
         children: [
           Expanded(
             flex: 4,
-            child: Container(
-              alignment: Alignment.center,
-              // color: Colors.amber,
-              width: size.width * 0.35,
-              height: size.width * 0.35,
-              child: Image(
-                fit: BoxFit.fill,
-                image: AssetImage('images/login.png'),
-                alignment: Alignment.bottomCenter,
-                width: size.width * 0.35,
-                height: size.width * 0.35,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'TBC',
+                  style: TextStyle(
+                      fontFamily: 'KaushanScript',
+                      color: primerColor,
+                      fontSize: 70,
+                      fontWeight: FontWeight.w400),
+                ),
+                Text(
+                  'notes',
+                  style: TextStyle(
+                      fontFamily: 'KaushanScript',
+                      color: primerColor,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w400),
+                ),
+              ],
             ),
           ),
           Expanded(

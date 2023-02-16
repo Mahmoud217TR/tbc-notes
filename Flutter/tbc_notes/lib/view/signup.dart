@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tbc_notes/controller/iconButtonController.dart';
 import 'package:tbc_notes/view/constant.dart';
 import 'package:tbc_notes/view/home.dart';
+import 'package:tbc_notes/view/login.dart';
 import 'package:tbc_notes/view/widgets/submitButton.dart';
 
 class SignUp extends StatelessWidget {
@@ -18,18 +19,26 @@ class SignUp extends StatelessWidget {
         children: [
           Expanded(
             flex: 4,
-            child: Container(
-              alignment: Alignment.center,
-              // color: Colors.amber,
-              width: size.width * 0.35,
-              height: size.width * 0.35,
-              child: Image(
-                fit: BoxFit.fill,
-                image: AssetImage('images/login.png'),
-                alignment: Alignment.bottomCenter,
-                width: size.width * 0.35,
-                height: size.width * 0.35,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'TBC',
+                  style: TextStyle(
+                      fontFamily: 'KaushanScript',
+                      color: primerColor,
+                      fontSize: 70,
+                      fontWeight: FontWeight.w400),
+                ),
+                Text(
+                  'notes',
+                  style: TextStyle(
+                      fontFamily: 'KaushanScript',
+                      color: primerColor,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w400),
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -47,7 +56,7 @@ class SignUp extends StatelessWidget {
                     children: [
                       Expanded(
                         child: TextFormField(
-                          keyboardType: TextInputType.name,
+                          keyboardType: TextInputType.emailAddress,
                           textCapitalization: TextCapitalization.words,
                           decoration: InputDecoration(
                             prefixIcon: Icon(
@@ -59,7 +68,7 @@ class SignUp extends StatelessWidget {
                             // hintStyle: TextStyle(color: Colors.grey),
                             labelText: 'EMAIL',
                             labelStyle: TextStyle(
-                                color: Color.fromARGB(255, 183, 182, 182),
+                                color: primerColorWithOpacity,
                                 fontSize: size.width * 0.05,
                                 fontWeight: FontWeight.w500,
                                 letterSpacing: 1),
@@ -81,7 +90,7 @@ class SignUp extends StatelessWidget {
                             // hintStyle: TextStyle(color: Colors.grey),
                             labelText: 'USERNAME',
                             labelStyle: TextStyle(
-                                color: Color.fromARGB(255, 183, 182, 182),
+                                color: primerColorWithOpacity,
                                 fontSize: size.width * 0.05,
                                 fontWeight: FontWeight.w500,
                                 letterSpacing: 1),
@@ -105,13 +114,16 @@ class SignUp extends StatelessWidget {
                                 // hintStyle: TextStyle(color: Colors.grey),
                                 labelText: 'PASSWORD',
                                 labelStyle: TextStyle(
-                                    color: Color.fromARGB(255, 183, 182, 182),
+                                    color: primerColorWithOpacity,
                                     fontSize: size.width * 0.05,
                                     fontWeight: FontWeight.w500,
                                     letterSpacing: 1),
                                 border: InputBorder.none,
                                 suffixIcon: IconButton(
-                                  icon: Icon(Icons.remove_red_eye_outlined),
+                                  icon: Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: primerColorWithOpacity,
+                                  ),
                                   onPressed: () {
                                     controller.click();
                                   },
@@ -133,7 +145,7 @@ class SignUp extends StatelessWidget {
                   function: () {
                     Get.to(() => Home());
                   },
-                  text: 'Login',
+                  text: 'Sign Up',
                 )),
           ),
           Expanded(
@@ -151,13 +163,16 @@ class SignUp extends StatelessWidget {
                         color: Color.fromARGB(255, 183, 182, 182)),
                   ),
                   InkWell(
+                      onTap: () {
+                        Get.to(() => Login());
+                      },
                       child: Text(
-                    'LOGIN',
-                    style: TextStyle(
-                        color: primerColor,
-                        fontSize: size.width * 0.05,
-                        letterSpacing: 1),
-                  )),
+                        'LOGIN',
+                        style: TextStyle(
+                            color: primerColor,
+                            fontSize: size.width * 0.05,
+                            letterSpacing: 1),
+                      )),
                 ],
               ),
             ),
