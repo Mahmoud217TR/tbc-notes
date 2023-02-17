@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tbc_notes/view/constant.dart';
 import 'package:tbc_notes/view/login.dart';
 
 import 'widgets/submitButton.dart';
@@ -17,12 +18,12 @@ class WelcomePage extends StatelessWidget {
             flex: 6,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:const [
+              children: [
                 Text(
                   'TBC',
                   style: TextStyle(
                       fontFamily: 'KaushanScript',
-                      color: Color(0xff333C4A),
+                      color: primerColor,
                       fontSize: 70,
                       fontWeight: FontWeight.w400),
                 ),
@@ -30,7 +31,7 @@ class WelcomePage extends StatelessWidget {
                   'notes',
                   style: TextStyle(
                       fontFamily: 'KaushanScript',
-                      color: Color(0xff333C4A),
+                      color: primerColor,
                       fontSize: 26,
                       fontWeight: FontWeight.w400),
                 ),
@@ -44,7 +45,7 @@ class WelcomePage extends StatelessWidget {
               child: SubmitButton(
                 text: 'Get Started',
                 function: () {
-                  Get.to(()=>  Login());
+                  Get.to(() => Login());
                 },
               ),
             ),
@@ -54,4 +55,3 @@ class WelcomePage extends StatelessWidget {
     );
   }
 }
-

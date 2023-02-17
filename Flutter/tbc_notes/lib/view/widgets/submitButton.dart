@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tbc_notes/view/constant.dart';
 
 class SubmitButton extends StatelessWidget {
   final String text;
@@ -14,8 +15,8 @@ class SubmitButton extends StatelessWidget {
     return Container(
       // width: 300,
       decoration: BoxDecoration(
-          color: Color(0xff333C4A),
-          boxShadow: [
+          color: primerColor,
+          boxShadow: const [
             BoxShadow(
                 color: Color.fromARGB(48, 73, 86, 100),
                 blurRadius: 20,
@@ -28,7 +29,7 @@ class SubmitButton extends StatelessWidget {
         onPressed: function,
         child: Text(
           text,
-          style: TextStyle(color: Colors.white, fontSize: 25),
+          style: const TextStyle(color: Colors.white, fontSize: 25),
         ),
       ),
     );
