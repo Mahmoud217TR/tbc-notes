@@ -24,7 +24,10 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['nullable', 'string'],
+            'content' => ['nullable', 'string'],
+            'category' => ['nullable', 'int', 'exists:categories,id'],
+            'done' => ['nullable', 'boolean'],
         ];
     }
 }

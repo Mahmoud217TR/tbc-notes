@@ -24,8 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:categories,id',
-            'name' => 'required|string|unique:categories,name,'.$this->id,
+            'name' => 'nullable|string|unique:categories,name,'.$this->category->id,
         ];
     }
 }

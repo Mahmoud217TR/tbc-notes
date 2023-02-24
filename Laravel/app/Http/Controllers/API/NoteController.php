@@ -36,7 +36,14 @@ class NoteController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        //
+        $note = Note::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'category_id' => $request->category,
+            'user_id' => user()->id,
+        ]);
+
+        return new NoteResource($note->load('images'));
     }
 
     /**
@@ -48,7 +55,7 @@ class NoteController extends Controller
     public function show(Note $note)
     {
         $this->authorize('view', $note);
-        return new NoteResource($note);
+        return new NoteResource($note->load('images'));
     }
 
     /**
@@ -60,7 +67,11 @@ class NoteController extends Controller
      */
     public function update(UpdateRequest $request, Note $note)
     {
-        //
+        $this->authorize('update', $note);
+        
+        $note->update($request->only('title','content','category','done'));
+
+        return new NoteResource($note->load('images','category'));
     }
 
     /**
@@ -71,6 +82,12 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $this->authorize('delete', $note);
+
+        $note->delete();
+
+        return response()->json([
+            'message' => "Note Deleted Successfully",
+        ]);
     }
 }

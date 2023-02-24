@@ -81,7 +81,7 @@ class CategoryController extends Controller
     {
         $this->authorize('delete', $category);
 
-        $action->onQueue()->execute($category->notes);
+        $action->execute($category->notes);
         $category->delete();
 
         return response()->json([
