@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Auth\UserController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\NoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,6 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('logout-from-all', [UserController::class,'logoutFromAll']);
 
     Route::apiResource('category',CategoryController::class)->except('create','edit');
+    Route::apiResource('note',NoteController::class)->except('create','edit');
 });
 

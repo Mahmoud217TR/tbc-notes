@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ImageConversion;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 if (!function_exists('media')) {
@@ -28,3 +29,18 @@ if (!function_exists('user')) {
 	} 
 }
 
+if (!function_exists('modelId')) {
+	function modelId(Model|int $model){
+		if($model instanceof Model){
+			return $model->id;
+		}else{
+			return $model;
+		}
+	} 
+}
+
+if (!function_exists('samplePath')) {
+	function samplePath(int $number): string{
+		return public_path('images\\samples\\'.$number.'.png');
+	} 
+}

@@ -4,9 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Actions\DeleteCategoryNotesAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\IndexRequest;
+use App\Http\Requests\Category\StoreRequest;
+use App\Http\Requests\Category\UpdateRequest;
 use App\Models\Category;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
@@ -16,10 +17,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
+        $query = user()->categories()
+            ->when(filled($request->keyword), fn($query) => $query->withKeyword($request->keyword));
+
         return CategoryResource::collection(
-            user()->categories()->withCount('notes')->get()
+           $query->paginate($request->perpage)
         );
     }
 
@@ -29,7 +33,7 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreRequest $request)
     {
         $category = Category::create([
             'name' => $request->name,
@@ -58,7 +62,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateRequest $request, Category $category)
     {
         $this->authorize('update', $category);
 

@@ -4,8 +4,11 @@ namespace App\Models;
 
 use App\Enums\ImageConversion;
 use App\Models\Traits\BelongsToUser;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -42,27 +45,31 @@ class Category extends Model implements HasMedia
             });
     }
 
-    public function associateImage($image_path){
+    public function associateImage(string $image_path): void {
         $this->addMedia($image_path)
             ->toMediaCollection(self::MAIN_IMAGE);
     }
 
-    public function associateImagePreservingOriginal($image_path){
+    public function associateImagePreservingOriginal(string $image_path): void {
         $this->addMedia($image_path)
             ->preservingOriginal()
             ->toMediaCollection(self::MAIN_IMAGE);
     }
 
-    public function mainImage(){
+    public function mainImage(): MorphMany {
         return $this->media()->where('collection_name', self::MAIN_IMAGE);
     }
 
-    public function getImageAttribute(){
+    public function getImageAttribute(): Media{
         return $this->mainImage()->first();
     }
 
-    public function notes(){
+    public function notes(): HasMany {
         return $this->hasMany(Note::class);
+    }
+
+    public function scopeWithKeyword(Builder $query, $keyword){
+        $query->whereRaw("LOWER(name) like LOWER('%".$keyword."%')");
     }
 
 }

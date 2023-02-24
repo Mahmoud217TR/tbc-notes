@@ -23,6 +23,7 @@ class NoteFactory extends Factory
             'content' => fake()->paragraph(),
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
+            'done' => fake()->boolean(30),
         ];
     }
 

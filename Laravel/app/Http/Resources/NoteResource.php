@@ -18,8 +18,10 @@ class NoteResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
+            'done' => $this->done,
             'created_at' => (string)$this->created_at,
             'updated_at' => (string)$this->updated_at,
+            'images' => ImageResource::collection($this->whenLoaded('images')),
         ];
     }
 }

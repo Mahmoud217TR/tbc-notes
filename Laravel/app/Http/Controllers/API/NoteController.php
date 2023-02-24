@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Note\IndexRequest;
+use App\Http\Requests\Note\StoreRequest;
+use App\Http\Requests\Note\UpdateRequest;
 use App\Models\Note;
-use App\Http\Requests\StoreNoteRequest;
-use App\Http\Requests\UpdateNoteRequest;
+use App\Http\Resources\NoteResource;
 
 class NoteController extends Controller
 {
@@ -14,19 +16,16 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
-        //
-    }
+        $query = user()->notes()
+            ->when(filled($request->category), fn($query) => $query->inCategory($request->category))
+            ->when(filled($request->is_done), fn($query) => $query->whereDoneIs($request->is_done))
+            ->when(filled($request->keyword), fn($query) => $query->withKeyword($request->keyword));
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return NoteResource::collection(
+            $query->paginate($request->perpage)->load('images')
+        );
     }
 
     /**
@@ -35,7 +34,7 @@ class NoteController extends Controller
      * @param  \App\Http\Requests\StoreNoteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNoteRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -48,18 +47,8 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Note $note)
-    {
-        //
+        $this->authorize('view', $note);
+        return new NoteResource($note);
     }
 
     /**
@@ -69,7 +58,7 @@ class NoteController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNoteRequest $request, Note $note)
+    public function update(UpdateRequest $request, Note $note)
     {
         //
     }

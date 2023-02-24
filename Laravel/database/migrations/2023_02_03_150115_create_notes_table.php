@@ -19,6 +19,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->default('untitled');
             $table->text('content')->nullable();
+            $table->boolean('done')->default(false);
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Category::class)->nullable();
             $table->timestamps();

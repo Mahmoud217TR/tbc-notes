@@ -18,23 +18,42 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)
+        User::factory(2)
             ->create()
             ->each(function($user){
                 Category::factory(3)
                     ->forUser($user)
                     ->create()
                     ->each(function($category) use ($user){
+
+                        $category->associateImagePreservingOriginal(samplePath(fake()->numberBetween(1, 10)));
+
                         Note::factory(2)
                             ->forCategory($category)
                             ->forUser($user)
-                            ->create();
+                            ->create()
+                            ->each(function($note){
+                                $note->associateImagesPreservingOriginals([
+                                    samplePath(fake()->numberBetween(1, 10)),
+                                    samplePath(fake()->numberBetween(1, 10)),
+                                    samplePath(fake()->numberBetween(1, 10)),
+                                ]);
+                            });
+                        
+                        
                     });
                     
                 Note::factory(3)
                     ->uncategorized()
                     ->forUser($user)
-                    ->create();
+                    ->create()
+                    ->each(function($note){
+                        $note->associateImagesPreservingOriginals([
+                            samplePath(fake()->numberBetween(1, 10)),
+                            samplePath(fake()->numberBetween(1, 10)),
+                            samplePath(fake()->numberBetween(1, 10)),
+                        ]);
+                    });
             });
     }
 }
