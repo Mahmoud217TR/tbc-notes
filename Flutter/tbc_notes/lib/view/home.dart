@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbc_notes/controller/homeController.dart';
+import 'package:tbc_notes/view/addNote.dart';
 import 'package:tbc_notes/view/constant.dart';
 import 'package:tbc_notes/view/welcomePage.dart';
 import 'package:tbc_notes/view/widgets/searchbar.dart';
@@ -39,7 +40,7 @@ class Home extends StatelessWidget {
               },
               selectedItemColor: secondColor,
               selectedLabelStyle:
-                  TextStyle(color: Color.fromARGB(255, 25, 21, 11)),
+                  const TextStyle(color: Color.fromARGB(255, 25, 21, 11)),
               selectedFontSize: size.width * 0.05,
               unselectedFontSize: size.width * 0.05,
               items: [
@@ -81,7 +82,9 @@ class Home extends StatelessWidget {
               elevation: 10,
               backgroundColor: primerColor,
               // foregroundColor: fourthColor,
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => AddNote());
+              },
               child: Container(
                   height: size.width * 0.19,
                   width: size.width * 0.19,
@@ -93,7 +96,7 @@ class Home extends StatelessWidget {
                           colors: [
                             // fourthColor,
                             fourthColor,
-                            primerColorWithOpacity,
+                            secondColor,
                             primerColor,
                             // secondColor,
                           ])),
@@ -121,10 +124,10 @@ class Home extends StatelessWidget {
             Expanded(
                 flex: 11,
                 child: Obx(() => controller.currentIndex.value == 0
-                    ? Container(
-                        child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
+                    ? GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2),
                         itemBuilder: (BuildContext context, int index) {
                           return GestureDetector(
                             onTap: () {
@@ -134,18 +137,18 @@ class Home extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                                 //<-- SEE HERE
-                                side: BorderSide(
+                                side: const BorderSide(
                                   width: 1,
                                   color: Color.fromARGB(255, 157, 157, 157),
                                 ),
                               ),
                               // color: Colors.amber,
                               elevation: 0,
-                              child: Center(child: Text('hi')),
+                              child: const Center(child: Text('hi')),
                             ),
                           );
                         },
-                      ))
+                      )
                     : Container(
                         color: Colors.black,
                       ))),

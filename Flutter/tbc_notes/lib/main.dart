@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tbc_notes/view/addNote.dart';
 import 'package:tbc_notes/view/home.dart';
 import 'package:tbc_notes/view/signup.dart';
 import 'package:tbc_notes/view/test.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       // theme: ThemeData(primarySwatch: MaterialColor(primary, swatch)),
       debugShowCheckedModeBanner: false,
-      home: SignUp(),
+      home: Home(),
     );
   }
 }
